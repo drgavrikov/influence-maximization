@@ -1,9 +1,5 @@
 #include "arc.h"
 
-constexpr size_t Arc::record_size() noexcept {
-    return sizeof(source) + sizeof(target) + sizeof(weight) + 1; // Include newline character
-}
-
 void Arc::write(std::ofstream &file) const {
     if (!file) {
         throw std::ios_base::failure("Failed to write to file.");
@@ -12,7 +8,7 @@ void Arc::write(std::ofstream &file) const {
     file.write(reinterpret_cast<const char *>(&source), sizeof(source));
     file.write(reinterpret_cast<const char *>(&target), sizeof(target));
     file.write(reinterpret_cast<const char *>(&weight), sizeof(weight));
-    file.put('\n');
+    file << std::endl;
 }
 
 bool Arc::operator<(const Arc &other) const {

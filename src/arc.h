@@ -10,7 +10,9 @@ struct Arc {
     uint32_t target;
     double weight;
 
-    static constexpr size_t record_size() noexcept;
+    static constexpr size_t record_size() noexcept {
+        return sizeof(uint32_t) + sizeof(uint32_t) + sizeof(double) + 1; // Include newline character
+    }
 
     void write(std::ofstream &file) const;
 
